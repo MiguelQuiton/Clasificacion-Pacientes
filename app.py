@@ -12,36 +12,19 @@ st.title("Prototipo de clasificación de pacientes")
 # Datos sintéticos para demostrar el funcionamiento del árbol.
 # Los rangos y criterios son ficticios; deben reemplazarse por datos
 # y etiquetas definidos para el proyecto.
-rng = np.random.default_rng(42)
-cantidad_registros = 600
-
-datos = pd.DataFrame({
-    "edad": rng.integers(1, 100, size=cantidad_registros),
-    "temperatura": rng.uniform(35.0, 41.0, size=cantidad_registros).round(1),
-    "presion_sistolica": rng.integers(80, 201, size=cantidad_registros),
-    "presion_diastolica": rng.integers(50, 131, size=cantidad_registros),
-    "frecuencia_cardiaca": rng.integers(40, 161, size=cantidad_registros),
-    "saturacion_oxigeno": rng.integers(75, 101, size=cantidad_registros),
-    "sintomas": rng.integers(0, 4, size=cantidad_registros),
-    "antecedentes_relevantes": rng.integers(0, 2, size=cantidad_registros),
-})
-
-# Etiquetas artificiales solo para que el prototipo sea ejecutable.
-# No representan un protocolo de triaje ni una recomendación médica.
-puntaje_demo = (
-    (datos["temperatura"] > 38.0).astype(int)
-    + (datos["sintomas"] >= 2).astype(int)
-    + (datos["saturacion_oxigeno"] < 92).astype(int) * 2
-    + (datos["frecuencia_cardiaca"] > 110).astype(int)
-    + (datos["presion_sistolica"] < 90).astype(int) * 2
-    + datos["antecedentes_relevantes"]
+# Carga datos que ya tienen una clasificación asignada
+datos = pd.read_csv(
+    "pacientes.csv",
+    sep=None,
+    engine="python",
+    encoding="utf-8-sig",
 )
 
-datos["clasificacion"] = pd.cut(
-    puntaje_demo,
-    bins=[-np.inf, 1, 3, np.inf],
-    labels=["Baja", "Media", "Alta"],
-)
+# Quita espacios accidentales en los encabezados
+datos.columns = datos.columns.astype(str).str.strip()
+
+# Muestra los encabezados detectados en la aplicación
+st.write("Columnas que Python encontró:", datos.columns.tolist())
 
 columnas_entrada = [
     "edad",
@@ -54,13 +37,37 @@ columnas_entrada = [
     "antecedentes_relevantes",
 ]
 
+columna_objetivo = "clasificacion"
+
+# Comprueba que el CSV tenga todas las columnas necesarias
+columnas_necesarias = columnas_entrada + [columna_objetivo]
+faltantes = [col for col in columnas_necesarias if col not in datos.columns]
+
+if faltantes:
+    st.error(f"Faltan estas columnas en pacientes.csv: {faltantes}")
+    st.stop()
+
+# Elimina filas que no tengan datos o clasificación
+datos = datos.dropna(subset=columnas_necesarias)
+
+# X son las variables de entrada; y son las respuestas que aprenderá el árbol
 X = datos[columnas_entrada]
-y = datos["clasificacion"]
+y = datos[columna_objetivo].astype(str).str.strip().str.capitalize()
+
+# Avisa si el archivo no contiene las tres categorías
+categorias_esperadas = {"Baja", "Media", "Alta"}
+categorias_encontradas = set(y.unique())
+
+if not categorias_esperadas.issubset(categorias_encontradas):
+    st.error(
+        "El CSV debe incluir ejemplos clasificados como Baja, Media y Alta."
+    )
+    st.stop()
 
 X_entrenamiento, X_prueba, y_entrenamiento, y_prueba = train_test_split(
     X,
     y,
-    test_size=0.2,
+    test_size=0.4,
     random_state=42,
     stratify=y,
 )

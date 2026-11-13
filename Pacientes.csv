@@ -1,0 +1,10 @@
+﻿edad;temperatura;presion_sistolica;presion_diastolica;frecuencia_cardiaca;saturacion_oxigeno;sintomas;antecedentes_relevantes;clasificacion
+25;36.5;120;80;75;98;0;0;Baja
+50;37.0;130;85;90;97;1;1;Media
+70;38.0;140;90;100;95;2;1;Alta
+20;36.5;110;80;75;98;0;0;Baja
+55;37.0;135;85;90;97;1;1;Media
+65;38.0;150;90;100;95;2;1;Alta
+30;36.5;125;80;75;98;0;0;Baja
+45;37.0;133;85;90;97;1;1;Media
+80;38.0;145;90;100;95;2;1;Alta
