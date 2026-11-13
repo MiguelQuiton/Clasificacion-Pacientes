@@ -23,8 +23,6 @@ datos = pd.read_csv(
 # Quita espacios accidentales en los encabezados
 datos.columns = datos.columns.astype(str).str.strip()
 
-# Muestra los encabezados detectados en la aplicación
-st.write("Columnas que Python encontró:", datos.columns.tolist())
 
 columnas_entrada = [
     "edad",
