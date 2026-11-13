@@ -132,7 +132,3 @@ if enviar:
 
     st.subheader("Resultado del prototipo")
     st.write(f"**Clasificación estimada: {prediccion}**")
-
-    st.write("Probabilidades estimadas:")
-    for categoria, probabilidad in zip(modelo.classes_, probabilidades):
-        st.write(f"- {categoria}: {probabilidad:.1%}")
