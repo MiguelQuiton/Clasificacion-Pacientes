@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 
-st.set_page_config(page_title="Clasificador de pacientes", page_icon="🌿")
+st.set_page_config(page_title="Clasificador de pacientes")
 st.title("Prototipo de clasificación de pacientes")
 
 
