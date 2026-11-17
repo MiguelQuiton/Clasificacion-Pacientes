@@ -10,8 +10,7 @@ st.title("Prototipo de clasificación de pacientes")
 
 
 # Datos sintéticos para demostrar el funcionamiento del árbol.
-# Los rangos y criterios son ficticios; deben reemplazarse por datos
-# y etiquetas definidos para el proyecto.
+
 # Carga datos que ya tienen una clasificación asignada
 datos = pd.read_csv(
     "pacientes.csv",
