@@ -76,3 +76,203 @@
 27;36.6;74;99;0;0;No urgente;Renovación de receta (caso simulado);Nivel 5
 41;36.8;80;98;0;0;No urgente;Retiro de puntos (caso simulado);Nivel 5
 52;36.5;78;98;0;1;No urgente;Síntomas crónicos estables (caso simulado);Nivel 5
+76;39.4;134;84;3;1;Reanimación (Riesgo vital inmediato);Insuficiencia respiratoria aguda grave por neumonía bilateral (caso simulado);Nivel 1
+64;38.8;138;82;3;1;Reanimación (Riesgo vital inmediato);Edema agudo de pulmón cardiogénico (caso simulado);Nivel 1
+29;36.2;140;83;3;0;Reanimación (Riesgo vital inmediato);Trauma torácico severo / neumotórax a tensión (caso simulado);Nivel 1
+52;39.6;136;85;3;1;Reanimación (Riesgo vital inmediato);Shock séptico con falla respiratoria aguda (caso simulado);Nivel 1
+41;37.1;142;81;3;1;Reanimación (Riesgo vital inmediato);Estatus asmático grave con hipoxemia crítica (caso simulado);Nivel 1
+85;35.4;46;79;3;1;Reanimación (Riesgo vital inmediato);Depresión respiratoria severa / riesgo de paro cardiorrespiratorio (caso simulado);Nivel 1
+34;36.8;132;85;3;0;Reanimación (Riesgo vital inmediato);Convulsión activa / estatus epiléptico con cianosis (caso simulado);Nivel 1
+72;38.9;128;86;3;1;Reanimación (Riesgo vital inmediato);Exacerbación crítica de EPOC con hipoxia severa (caso simulado);Nivel 1
+58;36.0;145;80;3;1;Reanimación (Riesgo vital inmediato);Shock anafiláctico grave con edema de glotis (caso simulado);Nivel 1
+48;38.5;130;87;3;0;Reanimación (Riesgo vital inmediato);Insuficiencia respiratoria aguda grave (caso simulado);Nivel 1
+69;39.3;139;82;3;1;Reanimación (Riesgo vital inmediato);Síndrome de distrés respiratorio agudo (SDRA) (caso simulado);Nivel 1
+23;36.3;148;84;3;0;Reanimación (Riesgo vital inmediato);Broncoaspiración masiva con obstrucción de vía aérea (caso simulado);Nivel 1
+79;35.6;48;78;3;1;Reanimación (Riesgo vital inmediato);Paro respiratorio inminente por sobredosis / intoxicación (caso simulado);Nivel 1
+55;39.1;135;85;3;1;Reanimación (Riesgo vital inmediato);Tromboembolismo pulmonar masivo con inestabilidad hemodinámica (caso simulado);Nivel 1
+61;38.7;131;86;3;1;Reanimación (Riesgo vital inmediato);Neumonía grave con falla multiorgánica e hipoxemia (caso simulado);Nivel 1
+37;36.7;144;81;3;0;Reanimación (Riesgo vital inmediato);Trauma craneoencefálico severo con hipoventilación (caso simulado);Nivel 1
+83;35.8;137;83;3;1;Reanimación (Riesgo vital inmediato);Insuficiencia cardíaca aguda con edema pulmonar severo (caso simulado);Nivel 1
+44;39.5;133;87;3;1;Reanimación (Riesgo vital inmediato);Shock séptico de foco pulmonar con desaturación crítica (caso simulado);Nivel 1
+66;37.0;141;80;3;1;Reanimación (Riesgo vital inmediato);Crisis miasténica con falla ventilatoria aguda (caso simulado);Nivel 1
+31;36.4;136;84;3;0;Reanimación (Riesgo vital inmediato);Inhalación de humo / quemadura de vía aérea con hipoxia (caso simulado);Nivel 1
+54;38.7;114;90;3;1;Emergencia (Muy urgente);Neumonía grave con hipoxemia moderada (caso simulado);Nivel 2
+38;37.3;122;90;3;1;Emergencia (Muy urgente);Crisis asmática severa sin agotamiento respiratorio (caso simulado);Nivel 2
+68;37.5;110;91;3;1;Emergencia (Muy urgente);Dolor torácico de origen cardíaco con desaturación (caso simulado);Nivel 2
+46;37.8;126;90;3;0;Emergencia (Muy urgente);Sospecha de tromboembolismo pulmonar (TEP) (caso simulado);Nivel 2
+77;37.2;108;92;3;1;Emergencia (Muy urgente);Sospecha de accidente cerebrovascular (ACV / ictus) (caso simulado);Nivel 2
+33;36.9;118;91;3;0;Emergencia (Muy urgente);Trauma mayor con disnea y dolor intenso severo (caso simulado);Nivel 2
+62;38.3;115;90;3;1;Emergencia (Muy urgente);Exacerbación grave de EPOC (caso simulado);Nivel 2
+51;38.9;124;92;3;1;Emergencia (Muy urgente);Sepsis sin shock con hipoxemia inicial (caso simulado);Nivel 2
+71;37.6;112;91;2;1;Emergencia (Muy urgente);Insuficiencia cardíaca descompensada (caso simulado);Nivel 2
+27;38.1;120;91;3;0;Emergencia (Muy urgente);Neumotórax espontáneo estable con hipoxemia (caso simulado);Nivel 2
+59;38.5;116;90;3;1;Emergencia (Muy urgente);Derrame pleural masivo con disnea de reposo (caso simulado);Nivel 2
+43;37.4;121;91;3;1;Emergencia (Muy urgente);Reacción alérgica sistémica moderada-grave con broncoespasmo (caso simulado);Nivel 2
+75;38.0;109;92;2;1;Emergencia (Muy urgente);Arritmia cardíaca rápida con desaturación leve-moderada (caso simulado);Nivel 2
+36;38.8;119;90;3;0;Emergencia (Muy urgente);Neumonía multilobar en adulto joven con taquipnea (caso simulado);Nivel 2
+65;37.7;113;91;3;1;Emergencia (Muy urgente);Síndrome coronario agudo sin elevación del ST con disnea (caso simulado);Nivel 2
+49;38.6;123;90;3;1;Emergencia (Muy urgente);Crisis hipertensiva con edema pulmonar incipiente (caso simulado);Nivel 2
+82;37.9;106;92;2;1;Emergencia (Muy urgente);Bronquitis aguda descompensada en adulto mayor frágil (caso simulado);Nivel 2
+24;37.1;125;91;3;0;Emergencia (Muy urgente);Crisis asmática aguda tras exposición a alérgeno (caso simulado);Nivel 2
+57;38.4;117;90;3;1;Emergencia (Muy urgente);Cetoacidosis diabética con respiración de Kussmaul e hipoxia (caso simulado);Nivel 2
+70;37.5;111;92;3;1;Emergencia (Muy urgente);Hemorragia digestiva alta activa con taquicardia y desaturación (caso simulado);Nivel 2
+78;35.2;34;76;3;1;Reanimación (Riesgo vital inmediato);Paro cardiorrespiratorio (caso simulado);Nivel 1
+61;35.5;38;78;3;1;Reanimación (Riesgo vital inmediato);Paro cardiorrespiratorio (caso simulado);Nivel 1
+54;39.5;146;83;3;1;Reanimación (Riesgo vital inmediato);Shock grave (hipovolémico, séptico, anafiláctico) (caso simulado);Nivel 1
+32;35.9;142;85;3;0;Reanimación (Riesgo vital inmediato);Shock grave (hipovolémico, séptico, anafiláctico) (caso simulado);Nivel 1
+27;36.4;138;82;3;0;Reanimación (Riesgo vital inmediato);Trauma craneoencefálico severo (caso simulado);Nivel 1
+45;36.6;48;81;3;0;Reanimación (Riesgo vital inmediato);Trauma craneoencefálico severo (caso simulado);Nivel 1
+83;38.9;136;80;3;1;Reanimación (Riesgo vital inmediato);Insuficiencia respiratoria aguda grave (caso simulado);Nivel 1
+68;39.2;134;82;3;1;Reanimación (Riesgo vital inmediato);Insuficiencia respiratoria aguda grave (caso simulado);Nivel 1
+19;38.7;140;84;3;1;Reanimación (Riesgo vital inmediato);Convulsión activa / estatus epiléptico (caso simulado);Nivel 1
+36;37.2;135;85;3;1;Reanimación (Riesgo vital inmediato);Convulsión activa / estatus epiléptico (caso simulado);Nivel 1
+63;37.1;118;91;3;1;Emergencia (Muy urgente);Dolor torácico de origen cardíaco (sospecha de síndrome coronario) (caso simulado);Nivel 2
+57;37.3;115;92;3;1;Emergencia (Muy urgente);Dolor torácico de origen cardíaco (sospecha de síndrome coronario) (caso simulado);Nivel 2
+79;37.0;110;92;3;1;Emergencia (Muy urgente);Sospecha de accidente cerebrovascular (ACV / ictus) (caso simulado);Nivel 2
+72;37.2;112;91;3;1;Emergencia (Muy urgente);Sospecha de accidente cerebrovascular (ACV / ictus) (caso simulado);Nivel 2
+41;36.3;126;90;3;0;Emergencia (Muy urgente);Hemorragia activa incontrolable (caso simulado);Nivel 2
+29;36.5;124;91;3;1;Emergencia (Muy urgente);Hemorragia activa incontrolable - población vulnerable obstétrica (caso simulado);Nivel 2
+34;36.8;120;91;3;0;Emergencia (Muy urgente);Trauma mayor o politraumatismo sin compromiso vital inmediato (caso simulado);Nivel 2
+49;37.0;117;92;3;0;Emergencia (Muy urgente);Trauma mayor o politraumatismo sin compromiso vital inmediato (caso simulado);Nivel 2
+52;37.6;116;92;3;1;Emergencia (Muy urgente);Dolor intenso severo (EVA 8-10/10) (caso simulado);Nivel 2
+66;37.8;114;91;3;1;Emergencia (Muy urgente);Dolor intenso severo (EVA 8-10/10) (caso simulado);Nivel 2
+47;38.6;102;95;2;0;Urgencia;Fiebre alta en adultos sin signos de alarma (caso simulado);Nivel 3
+60;38.5;104;94;2;1;Urgencia;Fiebre alta en adultos sin signos de alarma (caso simulado);Nivel 3
+75;38.4;100;94;2;1;Urgencia;Fiebre alta en adultos sin signos de alarma - adulto mayor frágil (caso simulado);Nivel 3
+38;37.7;96;96;2;0;Urgencia;Dolor abdominal agudo moderado (caso simulado);Nivel 3
+51;37.9;98;95;2;1;Urgencia;Dolor abdominal agudo moderado (caso simulado);Nivel 3
+28;37.6;95;96;2;1;Urgencia;Dolor abdominal agudo moderado - embarazada (caso simulado);Nivel 3
+44;37.2;94;96;2;0;Urgencia;Fracturas cerradas sin compromiso neurovascular (caso simulado);Nivel 3
+64;37.3;96;95;2;1;Urgencia;Fracturas cerradas sin compromiso neurovascular (caso simulado);Nivel 3
+33;37.5;103;94;2;1;Urgencia;Crisis asmática leve a moderada (caso simulado);Nivel 3
+25;37.4;101;95;2;1;Urgencia;Crisis asmática leve a moderada (caso simulado);Nivel 3
+29;36.8;84;98;1;0;Urgencia menor (Prioritario);Heridas superficiales que requieren sutura simple (caso simulado);Nivel 4
+46;36.9;86;97;1;1;Urgencia menor (Prioritario);Heridas superficiales que requieren sutura simple (caso simulado);Nivel 4
+37;36.7;82;98;1;0;Urgencia menor (Prioritario);Heridas superficiales que requieren sutura simple (caso simulado);Nivel 4
+23;36.6;80;98;1;0;Urgencia menor (Prioritario);Esguinces leves o contusiones menores (caso simulado);Nivel 4
+42;36.8;85;97;1;0;Urgencia menor (Prioritario);Esguinces leves o contusiones menores (caso simulado);Nivel 4
+58;37.0;88;97;1;1;Urgencia menor (Prioritario);Esguinces leves o contusiones menores (caso simulado);Nivel 4
+35;37.3;89;97;1;0;Urgencia menor (Prioritario);Infecciones urinarias o respiratorias sin fiebre alta ni disnea (caso simulado);Nivel 4
+52;37.4;90;97;1;1;Urgencia menor (Prioritario);Infecciones urinarias o respiratorias sin fiebre alta ni disnea (caso simulado);Nivel 4
+27;37.2;87;98;1;1;Urgencia menor (Prioritario);Infecciones urinarias o respiratorias sin fiebre alta ni disnea - embarazada (caso simulado);Nivel 4
+63;37.3;88;97;1;1;Urgencia menor (Prioritario);Infecciones urinarias o respiratorias sin fiebre alta ni disnea (caso simulado);Nivel 4
+21;36.7;76;98;0;0;No urgente;Resfriado común o cuadro viral leve (caso simulado);Nivel 5
+31;36.8;78;98;0;0;No urgente;Resfriado común o cuadro viral leve (caso simulado);Nivel 5
+26;36.6;74;99;0;0;No urgente;Resfriado común o cuadro viral leve (caso simulado);Nivel 5
+34;36.5;72;99;0;0;No urgente;Curaciones de rutina o retiro de puntos (caso simulado);Nivel 5
+48;36.6;75;98;0;0;No urgente;Curaciones de rutina o retiro de puntos (caso simulado);Nivel 5
+40;36.5;73;99;0;0;No urgente;Curaciones de rutina o retiro de puntos (caso simulado);Nivel 5
+59;36.5;74;98;0;1;No urgente;Renovación de recetas o consultas por síntomas crónicos estables (caso simulado);Nivel 5
+67;36.6;76;98;0;1;No urgente;Renovación de recetas o consultas por síntomas crónicos estables (caso simulado);Nivel 5
+53;36.4;71;99;0;1;No urgente;Renovación de recetas o consultas por síntomas crónicos estables (caso simulado);Nivel 5
+71;36.5;75;98;0;1;No urgente;Renovación de recetas o consultas por síntomas crónicos estables (caso simulado);Nivel 5
+61;36.5;0;0;3;1;Reanimación (Riesgo vital inmediato);Paro cardiorrespiratorio;Nivel 1
+66;36.2;0;0;4;1;Reanimación (Riesgo vital inmediato);Paro cardiorrespiratorio;Nivel 1
+72;36.8;0;0;3;1;Reanimación (Riesgo vital inmediato);Paro cardiorrespiratorio;Nivel 1
+79;36.1;0;0;4;1;Reanimación (Riesgo vital inmediato);Paro cardiorrespiratorio;Nivel 1
+85;36.4;0;0;3;1;Reanimación (Riesgo vital inmediato);Paro cardiorrespiratorio;Nivel 1
+63;35.8;138;88;4;1;Reanimación (Riesgo vital inmediato);Shock grave (hipovolémico, séptico o anafiláctico);Nivel 1
+69;35.5;145;86;3;1;Reanimación (Riesgo vital inmediato);Shock grave (hipovolémico, séptico o anafiláctico);Nivel 1
+74;36.0;132;89;4;1;Reanimación (Riesgo vital inmediato);Shock grave (hipovolémico, séptico o anafiláctico);Nivel 1
+81;35.7;150;85;3;1;Reanimación (Riesgo vital inmediato);Shock grave (hipovolémico, séptico o anafiláctico);Nivel 1
+88;36.1;140;87;4;1;Reanimación (Riesgo vital inmediato);Shock grave (hipovolémico, séptico o anafiláctico);Nivel 1
+62;36.7;118;90;3;1;Reanimación (Riesgo vital inmediato);Trauma craneoencefálico severo;Nivel 1
+68;37.0;125;88;4;1;Reanimación (Riesgo vital inmediato);Trauma craneoencefálico severo;Nivel 1
+73;36.4;130;89;3;1;Reanimación (Riesgo vital inmediato);Trauma craneoencefálico severo;Nivel 1
+77;37.2;142;86;4;1;Reanimación (Riesgo vital inmediato);Trauma craneoencefálico severo;Nivel 1
+90;36.0;120;90;3;1;Reanimación (Riesgo vital inmediato);Trauma craneoencefálico severo;Nivel 1
+64;39.0;132;82;4;1;Reanimación (Riesgo vital inmediato);Insuficiencia respiratoria aguda grave;Nivel 1
+70;38.5;140;85;3;1;Reanimación (Riesgo vital inmediato);Insuficiencia respiratoria aguda grave;Nivel 1
+76;39.2;128;84;4;1;Reanimación (Riesgo vital inmediato);Insuficiencia respiratoria aguda grave;Nivel 1
+83;38.8;146;80;3;1;Reanimación (Riesgo vital inmediato);Insuficiencia respiratoria aguda grave;Nivel 1
+89;39.1;135;83;4;1;Reanimación (Riesgo vital inmediato);Insuficiencia respiratoria aguda grave;Nivel 1
+65;37.0;125;90;3;1;Reanimación (Riesgo vital inmediato);Convulsión activa / estatus epiléptico;Nivel 1
+71;37.4;138;88;4;1;Reanimación (Riesgo vital inmediato);Convulsión activa / estatus epiléptico;Nivel 1
+78;36.8;130;89;3;1;Reanimación (Riesgo vital inmediato);Convulsión activa / estatus epiléptico;Nivel 1
+84;37.1;145;86;4;1;Reanimación (Riesgo vital inmediato);Convulsión activa / estatus epiléptico;Nivel 1
+92;36.9;122;90;3;1;Reanimación (Riesgo vital inmediato);Convulsión activa / estatus epiléptico;Nivel 1
+61;36.8;112;94;3;1;Emergencia (Muy urgente);Dolor torácico de origen cardíaco (sospecha de síndrome coronario);Nivel 2
+67;37.0;118;93;4;1;Emergencia (Muy urgente);Dolor torácico de origen cardíaco (sospecha de síndrome coronario);Nivel 2
+74;36.6;105;95;3;1;Emergencia (Muy urgente);Dolor torácico de origen cardíaco (sospecha de síndrome coronario);Nivel 2
+82;37.2;120;92;4;1;Emergencia (Muy urgente);Dolor torácico de origen cardíaco (sospecha de síndrome coronario);Nivel 2
+91;36.9;110;94;3;1;Emergencia (Muy urgente);Dolor torácico de origen cardíaco (sospecha de síndrome coronario);Nivel 2
+62;36.7;98;95;3;1;Emergencia (Muy urgente);Sospecha de accidente cerebrovascular (ACV / ictus);Nivel 2
+68;37.1;105;94;4;1;Emergencia (Muy urgente);Sospecha de accidente cerebrovascular (ACV / ictus);Nivel 2
+75;36.5;92;96;3;1;Emergencia (Muy urgente);Sospecha de accidente cerebrovascular (ACV / ictus);Nivel 2
+80;37.3;112;93;4;1;Emergencia (Muy urgente);Sospecha de accidente cerebrovascular (ACV / ictus);Nivel 2
+87;36.8;100;95;3;1;Emergencia (Muy urgente);Sospecha de accidente cerebrovascular (ACV / ictus);Nivel 2
+63;36.4;118;96;3;1;Emergencia (Muy urgente);Hemorragia activa incontrolable;Nivel 2
+69;37.0;125;95;4;1;Emergencia (Muy urgente);Hemorragia activa incontrolable;Nivel 2
+77;36.6;110;97;3;1;Emergencia (Muy urgente);Hemorragia activa incontrolable;Nivel 2
+84;37.2;130;94;4;1;Emergencia (Muy urgente);Hemorragia activa incontrolable;Nivel 2
+93;36.9;116;96;3;1;Emergencia (Muy urgente);Hemorragia activa incontrolable;Nivel 2
+64;36.7;108;94;3;1;Emergencia (Muy urgente);Trauma mayor o politraumatismo sin compromiso vital inmediato;Nivel 2
+71;37.1;115;93;4;1;Emergencia (Muy urgente);Trauma mayor o politraumatismo sin compromiso vital inmediato;Nivel 2
+78;36.5;102;95;3;1;Emergencia (Muy urgente);Trauma mayor o politraumatismo sin compromiso vital inmediato;Nivel 2
+86;37.0;120;92;4;1;Emergencia (Muy urgente);Trauma mayor o politraumatismo sin compromiso vital inmediato;Nivel 2
+95;36.8;112;94;3;1;Emergencia (Muy urgente);Trauma mayor o politraumatismo sin compromiso vital inmediato;Nivel 2
+66;36.9;105;96;3;1;Emergencia (Muy urgente);Dolor intenso severo (EVA 8-10/10);Nivel 2
+72;37.2;118;95;4;1;Emergencia (Muy urgente);Dolor intenso severo (EVA 8-10/10);Nivel 2
+79;36.6;98;97;3;1;Emergencia (Muy urgente);Dolor intenso severo (EVA 8-10/10);Nivel 2
+88;37.1;122;94;4;1;Emergencia (Muy urgente);Dolor intenso severo (EVA 8-10/10);Nivel 2
+97;36.8;110;96;3;1;Emergencia (Muy urgente);Dolor intenso severo (EVA 8-10/10);Nivel 2
+0;36.6;74;98;0;0;Urgencia menor (Prioritario);Control / cuadro viral leve en recién nacido - población vulnerable (caso simulado);Nivel 4
+1;36.5;72;98;0;0;Urgencia menor (Prioritario);Resfriado común en lactante - población vulnerable (caso simulado);Nivel 4
+2;36.6;75;98;0;0;Urgencia menor (Prioritario);Curación / revisión de herida superficial en infante - población vulnerable (caso simulado);Nivel 4
+3;36.5;73;99;0;0;Urgencia menor (Prioritario);Cuadro viral leve en preescolar - población vulnerable (caso simulado);Nivel 4
+4;36.6;74;98;0;0;Urgencia menor (Prioritario);Renovación de control / consulta leve en infante - población vulnerable (caso simulado);Nivel 4
+5;36.7;105;98;0;0;Urgencia menor (Prioritario);Resfriado común en infante de 5 años - prioridad por edad vulnerable (caso simulado);Nivel 4
+1;37.0;124;98;1;0;Urgencia menor (Prioritario);Infección respiratoria leve sin fiebre alta ni disnea en lactante (caso simulado);Nivel 4
+2;37.1;116;97;1;0;Urgencia menor (Prioritario);Otitis / infección leve sin fiebre alta en infante (caso simulado);Nivel 4
+4;36.8;108;98;1;0;Urgencia menor (Prioritario);Herida superficial que requiere sutura simple en infante (caso simulado);Nivel 4
+3;37.0;112;98;1;1;Urgencia menor (Prioritario);Esguince leve en infante con antecedentes - población vulnerable (caso simulado);Nivel 4
+1;38.2;136;95;2;0;Urgencia;Fiebre en lactante sin signos de alarma inmediatos - población vulnerable (caso simulado);Nivel 3
+2;38.4;132;95;2;0;Urgencia;Dolor abdominal agudo moderado en infante (caso simulado);Nivel 3
+0;37.9;140;96;2;0;Urgencia;Fiebre moderada en recién nacido - prioridad elevada (caso simulado);Nivel 3
+4;38.1;126;95;2;1;Urgencia;Crisis asmática leve a moderada en infante (caso simulado);Nivel 3
+3;38.3;128;94;2;0;Urgencia;Fiebre alta en infante sin signos de alarma (caso simulado);Nivel 3
+5;37.8;118;96;2;0;Urgencia;Fractura cerrada sin compromiso neurovascular en infante (caso simulado);Nivel 3
+1;38.0;134;95;2;1;Urgencia;Bronquiolitis / cuadro respiratorio moderado en lactante (caso simulado);Nivel 3
+2;38.5;130;95;2;0;Urgencia;Fiebre alta en preescolar - población vulnerable (caso simulado);Nivel 3
+4;37.9;122;95;2;1;Urgencia;Crisis asmática leve a moderada en infante con antecedentes (caso simulado);Nivel 3
+0;38.1;138;95;2;0;Urgencia;Rechazo alimentario y febrícula en recién nacido (caso simulado);Nivel 3
+1;39.0;148;91;3;0;Emergencia (Muy urgente);Fiebre alta con dificultad respiratoria moderada en lactante (caso simulado);Nivel 2
+0;38.6;154;92;3;1;Emergencia (Muy urgente);Recién nacido febril con signos de alarma - emergencia pediátrica (caso simulado);Nivel 2
+3;38.8;142;90;3;1;Emergencia (Muy urgente);Crisis asmática severa en infante (caso simulado);Nivel 2
+2;37.2;144;91;3;0;Emergencia (Muy urgente);Trauma mayor / caída de altura en infante sin compromiso vital inmediato (caso simulado);Nivel 2
+4;38.9;138;91;3;1;Emergencia (Muy urgente);Dolor intenso severo (EVA 8-10/10) en infante (caso simulado);Nivel 2
+1;38.7;146;92;3;0;Emergencia (Muy urgente);Deshidratación moderada-grave en lactante (caso simulado);Nivel 2
+5;38.5;136;90;3;1;Emergencia (Muy urgente);Neumonía con hipoxemia en infante - población vulnerable (caso simulado);Nivel 2
+2;39.1;145;91;3;0;Emergencia (Muy urgente);Fiebre muy alta con somnolencia en infante (caso simulado);Nivel 2
+3;37.4;140;92;3;0;Emergencia (Muy urgente);Hemorragia activa en infante (caso simulado);Nivel 2
+0;38.4;152;91;3;1;Emergencia (Muy urgente);Infección neonatal con taquipnea - emergencia (caso simulado);Nivel 2
+66;36.5;74;98;0;0;Urgencia menor (Prioritario);Resfriado común / cuadro viral leve en adulto mayor frágil (caso simulado);Nivel 4
+72;36.6;75;98;0;0;Urgencia menor (Prioritario);Curación de rutina / retiro de puntos en adulto mayor frágil (caso simulado);Nivel 4
+79;36.5;72;98;0;0;Urgencia menor (Prioritario);Renovación de recetas en adulto mayor frágil - población vulnerable (caso simulado);Nivel 4
+85;36.4;70;97;0;0;Urgencia menor (Prioritario);Consulta por síntomas leves en adulto mayor frágil de 85 años (caso simulado);Nivel 4
+68;36.6;76;97;0;1;Urgencia menor (Prioritario);Consulta por síntomas crónicos estables en adulto mayor frágil (caso simulado);Nivel 4
+74;36.5;74;97;0;1;Urgencia menor (Prioritario);Renovación de recetas / control en adulto mayor frágil (caso simulado);Nivel 4
+81;36.7;78;97;0;1;Urgencia menor (Prioritario);Cuadro viral leve en adulto mayor frágil - población vulnerable (caso simulado);Nivel 4
+70;36.8;80;98;1;1;Urgencia menor (Prioritario);Herida superficial que requiere sutura simple en adulto mayor (caso simulado);Nivel 4
+77;36.6;75;97;1;1;Urgencia menor (Prioritario);Esguince leve o contusión menor en adulto mayor frágil (caso simulado);Nivel 4
+88;36.4;71;97;1;1;Urgencia menor (Prioritario);Infección respiratoria leve sin fiebre alta en adulto mayor frágil (caso simulado);Nivel 4
+69;38.1;98;95;2;1;Urgencia;Fiebre alta sin signos de alarma en adulto mayor frágil (caso simulado);Nivel 3
+76;37.8;96;94;2;1;Urgencia;Dolor abdominal agudo moderado en adulto mayor (caso simulado);Nivel 3
+83;37.6;94;94;2;1;Urgencia;Infección respiratoria moderada en adulto mayor frágil (caso simulado);Nivel 3
+71;37.4;92;95;2;1;Urgencia;Fractura cerrada sin compromiso neurovascular en adulto mayor (caso simulado);Nivel 3
+80;38.0;100;94;2;1;Urgencia;Crisis asmática / broncoespasmo leve a moderado en adulto mayor (caso simulado);Nivel 3
+67;37.9;97;95;2;1;Urgencia;Dolor abdominal agudo moderado en adulto mayor con antecedentes (caso simulado);Nivel 3
+86;37.5;95;94;2;1;Urgencia;Descompensación leve de enfermedad crónica en adulto mayor frágil (caso simulado);Nivel 3
+75;38.2;102;95;2;1;Urgencia;Fiebre en adulto mayor frágil - población vulnerable (caso simulado);Nivel 3
+90;37.3;90;94;2;1;Urgencia;Trauma moderado en adulto mayor frágil (caso simulado);Nivel 3
+73;37.7;96;95;2;1;Urgencia;Infección urinaria febril en adulto mayor (caso simulado);Nivel 3
+78;37.2;114;91;3;1;Emergencia (Muy urgente);Dolor torácico de origen cardíaco en adulto mayor (caso simulado);Nivel 2
+84;37.0;110;92;3;1;Emergencia (Muy urgente);Sospecha de accidente cerebrovascular (ACV / ictus) en adulto mayor (caso simulado);Nivel 2
+69;37.4;118;90;3;1;Emergencia (Muy urgente);Hemorragia activa incontrolable en adulto mayor (caso simulado);Nivel 2
+82;37.1;112;91;3;1;Emergencia (Muy urgente);Trauma mayor o politraumatismo en adulto mayor frágil (caso simulado);Nivel 2
+74;37.6;116;91;3;1;Emergencia (Muy urgente);Dolor intenso severo (EVA 8-10/10) en adulto mayor (caso simulado);Nivel 2
+89;38.4;120;90;3;1;Emergencia (Muy urgente);Neumonía grave con hipoxemia en adulto mayor frágil (caso simulado);Nivel 2
+77;37.3;115;92;3;1;Emergencia (Muy urgente);Insuficiencia cardíaca descompensada en adulto mayor (caso simulado);Nivel 2
+91;36.9;108;91;3;1;Emergencia (Muy urgente);Síncope / deterioro neurológico agudo en adulto mayor frágil (caso simulado);Nivel 2
+68;38.5;122;90;3;1;Emergencia (Muy urgente);Sepsis incipiente sin shock en adulto mayor (caso simulado);Nivel 2
+80;37.5;113;91;3;1;Emergencia (Muy urgente);Crisis hipertensiva sintomática en adulto mayor (caso simulado);Nivel 2
