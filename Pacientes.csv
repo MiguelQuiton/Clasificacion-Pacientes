@@ -1,28 +1,78 @@
-﻿edad;temperatura;presion_sistolica;presion_diastolica;frecuencia_cardiaca;saturacion_oxigeno;sintomas;antecedentes_relevantes;clasificacion
-25;36.5;120;80;75;98;0;0;Baja
-50;37.0;130;85;90;97;1;1;Media
-70;38.0;140;90;100;95;2;1;Alta
-20;36.5;110;80;75;98;0;0;Baja
-55;37.0;135;85;90;97;1;1;Media
-65;38.0;150;90;100;95;2;1;Alta
-30;36.5;125;80;75;98;0;0;Baja
-45;37.0;133;85;90;97;1;1;Media
-80;38.0;145;90;100;95;2;1;Alta
-22;36.4;118;76;72;99;0;0;Baja
-31;36.8;122;80;78;98;1;0;Baja
-45;37.1;125;82;84;97;1;1;Baja
-28;36.6;115;74;70;99;0;0;Baja
-53;37.0;130;85;88;97;1;1;Baja
-39;37.2;120;78;82;98;1;0;Baja
-26;37.4;128;82;92;96;2;0;Media
-48;37.8;135;88;98;95;2;1;Media
-35;38.1;132;84;105;96;2;0;Media
-61;37.6;140;90;100;94;2;1;Media
-42;38.0;138;86;96;95;1;1;Media
-57;37.9;130;83;102;94;2;0;Media
-67;38.2;145;92;112;92;3;1;Alta
-74;39.0;150;95;118;90;3;1;Alta
-59;38.6;88;58;120;91;3;1;Alta
-81;39.2;155;98;125;89;3;1;Alta
-63;38.4;92;60;116;90;3;0;Alta
-70;39.1;148;94;122;88;2;1;Alta
+﻿edad;temperatura;frecuencia_cardiaca;saturacion_oxigeno;sintomas;antecedentes_relevantes;categoria_atencion;ejemplo_clinico;clasificacion
+25;36.5;75;98;0;0;No urgente;Curación de rutina (caso simulado);Nivel 5
+50;37.0;90;97;1;1;Urgencia menor (Prioritario);Herida superficial que requiere sutura simple (caso simulado);Nivel 4
+70;38.0;100;95;2;1;Urgencia;Fiebre en adulto sin signos de alarma (caso simulado);Nivel 3
+20;36.5;75;98;0;0;No urgente;Renovación de receta (caso simulado);Nivel 5
+55;37.0;90;97;1;1;Urgencia menor (Prioritario);Esguince leve (caso simulado);Nivel 4
+65;38.0;100;95;2;1;Urgencia;Dolor abdominal agudo moderado (caso simulado);Nivel 3
+30;36.5;75;98;0;0;No urgente;Retiro de puntos (caso simulado);Nivel 5
+45;37.0;90;97;1;1;Urgencia menor (Prioritario);Infección leve sin fiebre alta ni disnea (caso simulado);Nivel 4
+80;38.0;100;95;2;1;Urgencia;Fiebre en adulto sin signos de alarma (caso simulado);Nivel 3
+22;36.4;72;99;0;0;No urgente;Curación de rutina (caso simulado);Nivel 5
+31;36.8;78;98;1;0;Urgencia menor (Prioritario);Contusión menor (caso simulado);Nivel 4
+45;37.1;84;97;1;1;Urgencia menor (Prioritario);Herida superficial (caso simulado);Nivel 4
+28;36.6;70;99;0;0;No urgente;Renovación de receta (caso simulado);Nivel 5
+53;37.0;88;97;1;1;Urgencia menor (Prioritario);Infección leve sin fiebre alta ni disnea (caso simulado);Nivel 4
+39;37.2;82;98;1;0;Urgencia menor (Prioritario);Esguince leve (caso simulado);Nivel 4
+26;37.4;92;96;2;0;Urgencia;Dolor abdominal agudo moderado (caso simulado);Nivel 3
+48;37.8;98;95;2;1;Urgencia;Crisis asmática leve a moderada (caso simulado);Nivel 3
+35;38.1;105;96;2;0;Urgencia;Fiebre en adulto sin signos de alarma (caso simulado);Nivel 3
+61;37.6;100;94;2;1;Urgencia;Fractura cerrada sin compromiso neurovascular (caso simulado);Nivel 3
+42;38.0;96;95;1;1;Urgencia;Fiebre en adulto sin signos de alarma (caso simulado);Nivel 3
+57;37.9;102;94;2;0;Urgencia;Crisis asmática leve a moderada (caso simulado);Nivel 3
+67;38.2;112;92;3;1;Emergencia (Muy urgente);Emergencia con varios síntomas (caso simulado);Nivel 2
+74;39.0;118;90;3;1;Emergencia (Muy urgente);Emergencia con varios síntomas (caso simulado);Nivel 2
+59;38.6;120;91;3;1;Emergencia (Muy urgente);Emergencia con varios síntomas (caso simulado);Nivel 2
+81;39.2;125;89;3;1;Reanimación (Riesgo vital inmediato);Insuficiencia respiratoria aguda grave (caso simulado);Nivel 1
+63;38.4;116;90;3;0;Emergencia (Muy urgente);Emergencia con varios síntomas (caso simulado);Nivel 2
+70;39.1;122;88;2;1;Reanimación (Riesgo vital inmediato);Insuficiencia respiratoria aguda grave (caso simulado);Nivel 1
+45;36.8;0;0;3;1;Reanimación (Riesgo vital inmediato);Paro cardiorrespiratorio (caso simulado);Nivel 1
+62;38.1;132;86;3;1;Reanimación (Riesgo vital inmediato);Insuficiencia respiratoria aguda grave (caso simulado);Nivel 1
+58;35.8;145;88;3;1;Reanimación (Riesgo vital inmediato);Shock grave (caso simulado);Nivel 1
+34;37.0;120;94;3;0;Reanimación (Riesgo vital inmediato);Convulsión activa (caso simulado);Nivel 1
+71;36.2;138;89;3;1;Reanimación (Riesgo vital inmediato);Trauma craneoencefálico severo (caso simulado);Nivel 1
+29;37.4;126;91;3;0;Reanimación (Riesgo vital inmediato);Shock anafiláctico grave (caso simulado);Nivel 1
+80;38.5;150;84;3;1;Reanimación (Riesgo vital inmediato);Insuficiencia respiratoria aguda grave (caso simulado);Nivel 1
+53;36.0;42;93;3;1;Reanimación (Riesgo vital inmediato);Shock grave con pulso débil (caso simulado);Nivel 1
+66;37.2;118;90;3;1;Reanimación (Riesgo vital inmediato);Estatus epiléptico (caso simulado);Nivel 1
+40;36.5;0;0;3;0;Reanimación (Riesgo vital inmediato);Paro cardiorrespiratorio (caso simulado);Nivel 1
+59;37.2;112;94;3;1;Emergencia (Muy urgente);Dolor torácico con sospecha cardíaca (caso simulado);Nivel 2
+68;36.9;98;95;3;1;Emergencia (Muy urgente);Sospecha de accidente cerebrovascular (caso simulado);Nivel 2
+43;37.0;120;96;3;0;Emergencia (Muy urgente);Hemorragia activa incontrolable (caso simulado);Nivel 2
+35;37.4;108;94;3;0;Emergencia (Muy urgente);Trauma mayor sin compromiso vital inmediato (caso simulado);Nivel 2
+51;36.8;104;97;3;1;Emergencia (Muy urgente);Dolor intenso severo (caso simulado);Nivel 2
+73;37.1;116;93;3;1;Emergencia (Muy urgente);Sospecha de accidente cerebrovascular (caso simulado);Nivel 2
+27;36.6;99;96;3;0;Emergencia (Muy urgente);Hemorragia activa incontrolable (caso simulado);Nivel 2
+64;37.5;110;95;3;1;Emergencia (Muy urgente);Dolor torácico con sospecha cardíaca (caso simulado);Nivel 2
+48;37.0;102;98;3;0;Emergencia (Muy urgente);Trauma mayor sin compromiso vital inmediato (caso simulado);Nivel 2
+57;37.3;118;94;3;1;Emergencia (Muy urgente);Dolor intenso severo (caso simulado);Nivel 2
+70;38.2;100;96;2;1;Urgencia;Fiebre en adulto sin signos de alarma (caso simulado);Nivel 3
+42;37.1;92;97;2;0;Urgencia;Dolor abdominal agudo moderado (caso simulado);Nivel 3
+31;36.9;88;98;2;0;Urgencia;Fractura cerrada sin compromiso neurovascular (caso simulado);Nivel 3
+55;37.4;104;95;2;1;Urgencia;Crisis asmática leve a moderada (caso simulado);Nivel 3
+63;38.0;98;96;2;1;Urgencia;Fiebre en adulto sin signos de alarma (caso simulado);Nivel 3
+24;36.8;90;97;2;0;Urgencia;Dolor abdominal agudo moderado (caso simulado);Nivel 3
+47;37.2;96;96;2;0;Urgencia;Fractura cerrada sin compromiso neurovascular (caso simulado);Nivel 3
+36;37.0;101;95;2;0;Urgencia;Crisis asmática leve a moderada (caso simulado);Nivel 3
+78;38.3;106;94;2;1;Urgencia;Fiebre en adulto sin signos de alarma (caso simulado);Nivel 3
+52;37.5;94;97;2;1;Urgencia;Dolor abdominal agudo moderado (caso simulado);Nivel 3
+29;36.7;76;99;1;0;Urgencia menor (Prioritario);Herida superficial que requiere sutura simple (caso simulado);Nivel 4
+44;36.9;82;98;1;0;Urgencia menor (Prioritario);Esguince leve (caso simulado);Nivel 4
+61;37.0;86;97;1;1;Urgencia menor (Prioritario);Contusión menor (caso simulado);Nivel 4
+33;36.8;78;99;1;0;Urgencia menor (Prioritario);Infección leve sin fiebre alta ni disnea (caso simulado);Nivel 4
+50;37.1;90;97;1;1;Urgencia menor (Prioritario);Herida superficial que requiere sutura simple (caso simulado);Nivel 4
+26;36.6;74;98;1;0;Urgencia menor (Prioritario);Esguince leve (caso simulado);Nivel 4
+57;37.2;88;96;1;1;Urgencia menor (Prioritario);Infección leve sin fiebre alta ni disnea (caso simulado);Nivel 4
+39;36.9;84;98;1;0;Urgencia menor (Prioritario);Contusión menor (caso simulado);Nivel 4
+46;37.0;92;97;1;0;Urgencia menor (Prioritario);Herida superficial que requiere sutura simple (caso simulado);Nivel 4
+68;37.3;94;96;1;1;Urgencia menor (Prioritario);Esguince leve (caso simulado);Nivel 4
+25;36.5;75;98;0;0;No urgente;Resfriado común leve (caso simulado);Nivel 5
+32;36.7;78;99;0;0;No urgente;Curación de rutina (caso simulado);Nivel 5
+49;36.6;80;98;0;1;No urgente;Renovación de receta (caso simulado);Nivel 5
+21;36.4;72;99;0;0;No urgente;Retiro de puntos (caso simulado);Nivel 5
+56;36.8;82;98;0;1;No urgente;Síntomas crónicos estables (caso simulado);Nivel 5
+38;36.5;76;99;0;0;No urgente;Resfriado común leve (caso simulado);Nivel 5
+64;36.7;84;97;0;1;No urgente;Curación de rutina (caso simulado);Nivel 5
+27;36.6;74;99;0;0;No urgente;Renovación de receta (caso simulado);Nivel 5
+41;36.8;80;98;0;0;No urgente;Retiro de puntos (caso simulado);Nivel 5
+52;36.5;78;98;0;1;No urgente;Síntomas crónicos estables (caso simulado);Nivel 5
