@@ -10,7 +10,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 
 st.set_page_config(page_title="Clasificador de pacientes")
-st.title("Prototipo de clasificación de pacientes")
+st.title("Clasificación de pacientes")
 
 
 # Carga el archivo pacientes.csv desde la misma carpeta que app.py.
