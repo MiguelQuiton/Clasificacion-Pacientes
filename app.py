@@ -53,8 +53,9 @@ if faltantes:
     st.stop()
 
 
-# Quita filas que tengan vacíos en las variables usadas.
+# Quita filas que tengan vacíos en las variables usadas y limpia espacios en el texto.
 datos = datos.dropna(subset=columnas_necesarias).copy()
+datos["ejemplo_clinico"] = datos["ejemplo_clinico"].astype(str).str.strip()
 
 if datos.empty:
     st.error("El archivo pacientes.csv no tiene filas completas para entrenar.")
@@ -110,7 +111,7 @@ except ValueError as error:
     st.stop()
 
 
-# Codifica el texto del ejemplo clínico y deja pasar las columnas numéricas.
+# Codifica el texto de los antecedentes y deja pasar las columnas numéricas.
 preprocesador = ColumnTransformer(
     transformers=[
         ("numericas", "passthrough", columnas_numericas),
@@ -126,7 +127,7 @@ preprocesador = ColumnTransformer(
 modelo = Pipeline(
     steps=[
         ("preprocesamiento", preprocesador),
-        ("arbol", DecisionTreeClassifier(max_depth=4, random_state=42)),
+        ("arbol", DecisionTreeClassifier(max_depth=12, random_state=42)),
     ]
 )
 
@@ -138,12 +139,12 @@ precision = accuracy_score(y_prueba, predicciones_prueba)
 
 st.subheader("Datos de entrada")
 
-# Las opciones del selector salen de los ejemplos del CSV.
-ejemplos_disponibles = sorted(
-    datos["ejemplo_clinico"].astype(str).unique()
+# Opciones únicas excluyendo "Ninguno" para la lista desplegable de antecedentes.
+antecedentes_disponibles = sorted(
+    ant for ant in datos["ejemplo_clinico"].unique() if ant != "Ninguno"
 )
 
-with st.form("formulario_paciente"):
+with st.container(border=True):
     edad = st.number_input(
         "Edad",
         min_value=0,
@@ -173,42 +174,66 @@ with st.form("formulario_paciente"):
         value=98,
     )
 
-    sintomas = st.selectbox(
-        "Cantidad de síntomas",
-        options=[0, 1, 2, 3],
-    )
-
     antecedentes_relevantes = st.selectbox(
         "¿Tiene antecedentes relevantes?",
         options=[0, 1],
         format_func=lambda valor: "No" if valor == 0 else "Sí",
     )
 
-    ejemplo_clinico = st.selectbox(
-        "Ejemplo clínico",
-        options=ejemplos_disponibles,
-    )
+    if antecedentes_relevantes == 1:
+        antecedentes_seleccionados = st.multiselect(
+            "Antecedentes",
+            options=antecedentes_disponibles,
+            placeholder="Seleccione uno o más antecedentes (opcional)",
+        )
+    else:
+        antecedentes_seleccionados = []
 
-    enviar = st.form_submit_button("Clasificar")
+    enviar = st.button("Clasificar")
 
 
 if enviar:
-    nuevo_registro = pd.DataFrame(
-        [
-            {
-                "edad": edad,
-                "temperatura": temperatura,
-                "frecuencia_cardiaca": frecuencia_cardiaca,
-                "saturacion_oxigeno": saturacion_oxigeno,
-                "sintomas": sintomas,
-                "antecedentes_relevantes": antecedentes_relevantes,
-                "ejemplo_clinico": ejemplo_clinico,
-            }
-        ]
-    )
+    if antecedentes_seleccionados:
+        registros = pd.DataFrame(
+            [
+                {
+                    "edad": edad,
+                    "temperatura": temperatura,
+                    "frecuencia_cardiaca": frecuencia_cardiaca,
+                    "saturacion_oxigeno": saturacion_oxigeno,
+                    "sintomas": len(antecedentes_seleccionados),
+                    "antecedentes_relevantes": antecedentes_relevantes,
+                    "ejemplo_clinico": ant,
+                }
+                for ant in antecedentes_seleccionados
+            ]
+        )
+        predicciones = modelo.predict(registros)
+        lista_probs = modelo.predict_proba(registros)
 
-    prediccion = modelo.predict(nuevo_registro)[0]
-    probabilidades = modelo.predict_proba(nuevo_registro)[0]
+        indice_critico = min(
+            range(len(predicciones)),
+            key=lambda i: int(predicciones[i].split()[-1]),
+        )
+        prediccion = predicciones[indice_critico]
+        probabilidades = lista_probs[indice_critico]
+    else:
+        nuevo_registro = pd.DataFrame(
+            [
+                {
+                    "edad": edad,
+                    "temperatura": temperatura,
+                    "frecuencia_cardiaca": frecuencia_cardiaca,
+                    "saturacion_oxigeno": saturacion_oxigeno,
+                    "sintomas": 0,
+                    "antecedentes_relevantes": antecedentes_relevantes,
+                    "ejemplo_clinico": "Ninguno",
+                }
+            ]
+        )
+        prediccion = modelo.predict(nuevo_registro)[0]
+        probabilidades = modelo.predict_proba(nuevo_registro)[0]
+
     clases = modelo.named_steps["arbol"].classes_
 
     st.subheader("Resultado del prototipo")
