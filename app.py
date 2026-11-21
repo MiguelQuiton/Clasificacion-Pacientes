@@ -12,12 +12,6 @@ from sklearn.tree import DecisionTreeClassifier
 st.set_page_config(page_title="Clasificador de pacientes")
 st.title("Clasificación educativa de pacientes")
 
-st.info(
-    "Prototipo educativo con datos simulados. "
-    "No debe utilizarse para tomar decisiones médicas."
-)
-
-
 # El CSV completo debe estar en la misma carpeta que app.py.
 archivo_datos = "Pacientes.csv"
 
