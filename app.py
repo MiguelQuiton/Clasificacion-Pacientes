@@ -1,21 +1,25 @@
+from pathlib import Path
+
 import pandas as pd
 import streamlit as st
 
 from sklearn.compose import ColumnTransformer
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import accuracy_score
-from sklearn.model_selection import train_test_split
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import StratifiedGroupKFold
+from sklearn.neural_network import MLPClassifier
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 
 
 st.set_page_config(page_title="Clasificador de pacientes")
 st.title("Clasificación de pacientes")
+st.caption("Prototipo educativo para probar con casos simulados.")
 
 
 # Carga el archivo pacientes.csv desde la misma carpeta que app.py.
 datos = pd.read_csv(
-    "pacientes.csv",
+    Path(__file__).with_name("Pacientes.csv"),
     sep=None,
     engine="python",
     encoding="utf-8-sig",
@@ -25,7 +29,7 @@ datos = pd.read_csv(
 datos.columns = datos.columns.astype(str).str.strip()
 
 
-# Columnas numéricas que usará el árbol.
+# Variables numéricas del formulario.
 columnas_numericas = [
     "edad",
     "temperatura",
@@ -35,8 +39,8 @@ columnas_numericas = [
     "antecedentes_relevantes",
 ]
 
-# El ejemplo clínico también se usa como parámetro de entrada.
-columnas_entrada = columnas_numericas + ["ejemplo_clinico"]
+columna_texto = "ejemplo_clinico"
+columnas_entrada = columnas_numericas + [columna_texto]
 columna_objetivo = "clasificacion"
 columnas_necesarias = columnas_entrada + [columna_objetivo]
 
@@ -61,6 +65,10 @@ if datos.empty:
     st.stop()
 
 
+datos[columna_texto] = datos[columna_texto].astype(str).str.strip()
+datos[columna_objetivo] = datos[columna_objetivo].astype(str).str.strip()
+datos = datos.drop_duplicates(subset=columnas_necesarias)
+
 # Prepara los datos de entrada (X) y las clasificaciones esperadas (y).
 X = datos[columnas_entrada]
 y = datos[columna_objetivo].astype(str).str.strip()
@@ -83,65 +91,45 @@ if not niveles_esperados.issubset(niveles_encontrados):
     st.stop()
 
 
-# Verifica que haya suficientes ejemplos por nivel para dividir los datos.
-conteo_niveles = y.value_counts()
+@st.cache_resource
+def entrenar_modelo(X, y):
+    grupos = X[columna_texto].str.normalize("NFKD").str.encode(
+        "ascii", errors="ignore"
+    ).str.decode("ascii").str.casefold().str.replace(r"[^a-z0-9]+", " ", regex=True).str.strip()
+    particiones = StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42)
+    niveles = set(y)
 
-if conteo_niveles.min() < 2:
-    st.error(
-        "Cada nivel debe tener al menos 2 filas para poder entrenar "
-        "y evaluar el modelo. Agrega más ejemplos a los niveles con pocos datos."
+    for entrenamiento, prueba in particiones.split(X, y, grupos):
+        if set(y.iloc[entrenamiento]) == niveles and set(y.iloc[prueba]) == niveles:
+            break
+    else:
+        raise ValueError("Se necesitan más descripciones distintas por nivel para evaluar el modelo.")
+
+    preprocesador = ColumnTransformer(
+        [
+            ("numericas", StandardScaler(), columnas_numericas),
+            ("descripcion", TfidfVectorizer(
+                strip_accents="unicode", ngram_range=(1, 2)
+            ), columna_texto),
+        ]
     )
-    st.write("Cantidad de filas por nivel:")
-    st.write(conteo_niveles)
-    st.stop()
+    modelo = make_pipeline(
+        preprocesador,
+        MLPClassifier(hidden_layer_sizes=(24,), solver="lbfgs", max_iter=300, random_state=42),
+    )
+    modelo.fit(X.iloc[entrenamiento], y.iloc[entrenamiento])
+    exactitud = accuracy_score(y.iloc[prueba], modelo.predict(X.iloc[prueba]))
+    return modelo, exactitud
 
 
-# Divide los datos en entrenamiento y prueba.
 try:
-    X_entrenamiento, X_prueba, y_entrenamiento, y_prueba = train_test_split(
-        X,
-        y,
-        test_size=0.2,
-        random_state=42,
-        stratify=y,
-    )
+    modelo, exactitud = entrenar_modelo(X, y)
 except ValueError as error:
-    st.error(f"No se pudieron dividir los datos: {error}")
+    st.error(f"No se pudo entrenar el modelo: {error}")
     st.stop()
-
-
-# Codifica el texto del ejemplo clínico y deja pasar las columnas numéricas.
-preprocesador = ColumnTransformer(
-    transformers=[
-        ("numericas", "passthrough", columnas_numericas),
-        (
-            "ejemplo_clinico",
-            OneHotEncoder(handle_unknown="ignore"),
-            ["ejemplo_clinico"],
-        ),
-    ]
-)
-
-# El pipeline primero prepara los datos y luego entrena el árbol.
-modelo = Pipeline(
-    steps=[
-        ("preprocesamiento", preprocesador),
-        ("arbol", DecisionTreeClassifier(max_depth=4, random_state=42)),
-    ]
-)
-
-modelo.fit(X_entrenamiento, y_entrenamiento)
-
-predicciones_prueba = modelo.predict(X_prueba)
-precision = accuracy_score(y_prueba, predicciones_prueba)
 
 
 st.subheader("Datos de entrada")
-
-# Las opciones del selector salen de los ejemplos del CSV.
-ejemplos_disponibles = sorted(
-    datos["ejemplo_clinico"].astype(str).unique()
-)
 
 with st.form("formulario_paciente"):
     edad = st.number_input(
@@ -175,7 +163,7 @@ with st.form("formulario_paciente"):
 
     sintomas = st.selectbox(
         "Cantidad de síntomas",
-        options=[0, 1, 2, 3],
+        options=range(5),
     )
 
     antecedentes_relevantes = st.selectbox(
@@ -184,39 +172,31 @@ with st.form("formulario_paciente"):
         format_func=lambda valor: "No" if valor == 0 else "Sí",
     )
 
-    ejemplo_clinico = st.selectbox(
-        "Ejemplo clínico",
-        options=ejemplos_disponibles,
-    )
-
+    descripcion = st.text_area("Describe qué está pasando", max_chars=1000)
     enviar = st.form_submit_button("Clasificar")
 
 
 if enviar:
-    nuevo_registro = pd.DataFrame(
-        [
-            {
-                "edad": edad,
-                "temperatura": temperatura,
-                "frecuencia_cardiaca": frecuencia_cardiaca,
-                "saturacion_oxigeno": saturacion_oxigeno,
-                "sintomas": sintomas,
-                "antecedentes_relevantes": antecedentes_relevantes,
-                "ejemplo_clinico": ejemplo_clinico,
-            }
-        ]
-    )
+    if not descripcion.strip():
+        st.warning("Escribe una descripción del caso.")
+    else:
+        nuevo_registro = pd.DataFrame([{
+            "edad": edad,
+            "temperatura": temperatura,
+            "frecuencia_cardiaca": frecuencia_cardiaca,
+            "saturacion_oxigeno": saturacion_oxigeno,
+            "sintomas": sintomas,
+            "antecedentes_relevantes": antecedentes_relevantes,
+            columna_texto: descripcion.strip(),
+        }])
+        probabilidades = modelo.predict_proba(nuevo_registro)[0]
+        nivel = modelo.classes_[probabilidades.argmax()]
+        st.subheader("Resultado del prototipo")
+        st.write(f"**Clasificación estimada: {nivel}**")
 
-    prediccion = modelo.predict(nuevo_registro)[0]
-    probabilidades = modelo.predict_proba(nuevo_registro)[0]
-    clases = modelo.named_steps["arbol"].classes_
-
-    st.subheader("Resultado del prototipo")
-    st.write(f"**Clasificación estimada: {prediccion}**")
-
-    st.write("Probabilidades estimadas por el modelo:")
-    for categoria, probabilidad in zip(clases, probabilidades):
-        st.write(f"- {categoria}: {probabilidad:.1%}")
+        with st.expander("Probabilidades estimadas por el modelo"):
+            for categoria, probabilidad in zip(modelo.classes_, probabilidades):
+                st.write(f"- {categoria}: {probabilidad:.1%}")
 
 
-st.write(f"Precisión en el conjunto de prueba: {precision:.1%}")
+st.write(f"Exactitud en el conjunto de prueba: {exactitud:.1%}")
