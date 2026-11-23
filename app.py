@@ -1,3 +1,5 @@
+import json
+
 import pandas as pd
 import streamlit as st
 
@@ -7,6 +9,94 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.tree import DecisionTreeClassifier
+
+
+def graficos_del_caso(modelo, registro, columnas_numericas, antecedentes):
+    """Devuelve los dos gráficos DOT y las decisiones ordenadas del caso."""
+    preparador = modelo.named_steps["preprocesamiento"]
+    clasificador = modelo.named_steps["arbol"]
+    estructura = clasificador.tree_
+    fila = preparador.transform(registro)
+    visitados = set(clasificador.decision_path(fila).indices)
+    hoja = clasificador.apply(fila)[0]
+
+    # El orden coincide con las dos salidas del ColumnTransformer.
+    unidades = {
+        "edad": "años", "temperatura": "°C", "frecuencia_cardiaca": "lat/min",
+        "saturacion_oxigeno": "%", "sintomas": "", "antecedentes_relevantes": "",
+    }
+    etiquetas = {
+        "edad": "Edad", "temperatura": "Temperatura",
+        "frecuencia_cardiaca": "Frecuencia cardíaca",
+        "saturacion_oxigeno": "Saturación de oxígeno", "sintomas": "Cantidad de síntomas",
+        "antecedentes_relevantes": "Tiene antecedentes relevantes",
+    }
+    variables = [(etiquetas[c], unidades[c], c == "antecedentes_relevantes")
+                 for c in columnas_numericas]
+    variables.extend((f"Antecedente: {nombre}", "", True) for nombre in antecedentes)
+    codificador = preparador.named_transformers_["caso_clinico"]
+    variables.extend((f"Caso clínico: {nombre}", "", True)
+                     for nombre in codificador.categories_[0])
+
+    inicio = ['digraph Arbol {', 'graph [rankdir=TB];',
+              'node [shape=box, style="rounded,filled", fontname="Arial"];']
+    completo = inicio.copy()
+    camino = inicio.copy()
+    pasos = []
+    numero_por_nodo = {}
+    nodo = 0
+    while nodo != hoja:
+        numero_por_nodo[nodo] = len(numero_por_nodo) + 1
+        izquierda = estructura.children_left[nodo]
+        nodo = izquierda if izquierda in visitados else estructura.children_right[nodo]
+
+    for nodo in range(estructura.node_count):
+        izquierda = estructura.children_left[nodo]
+        derecha = estructura.children_right[nodo]
+        en_ruta = nodo in visitados
+        if izquierda == derecha:
+            clase = clasificador.classes_[estructura.value[nodo, 0].argmax()]
+            texto = f"Nivel estimado: {clase}"
+            forma = "ellipse"
+        else:
+            indice = estructura.feature[nodo]
+            nombre, unidad, binaria = variables[indice]
+            umbral = estructura.threshold[nodo]
+            sufijo = f" {unidad}" if unidad else ""
+            if binaria:
+                texto = f"¿{nombre}?"
+            else:
+                texto = f"¿{nombre} ≤ {umbral:g}{sufijo}?"
+            if en_ruta:
+                valor = float(fila[0, indice])
+                mostrado = ("Sí" if valor else "No") if binaria else f"{valor:g}{sufijo}"
+                va_izquierda = izquierda in visitados
+                afirmativa = (not va_izquierda) if binaria else va_izquierda
+                respuesta_caso = "Sí" if afirmativa else "No"
+                paso = numero_por_nodo[nodo]
+                pasos.append({"Paso": paso, "Pregunta del árbol": texto,
+                              "Valor del caso": mostrado, "Respuesta": respuesta_caso})
+                texto = f"Paso {paso} · {texto}\nValor del caso: {mostrado}"
+            forma = "box"
+        color = "#BCE6C9" if nodo == hoja else "#D6E9FF" if en_ruta else "#F3F4F6"
+        linea = (f'n{nodo} [label={json.dumps(texto, ensure_ascii=False)}, '
+                 f'shape={forma}, fillcolor="{color}"];')
+        completo.append(linea)
+        if en_ruta:
+            camino.append(linea)
+        if izquierda != derecha:
+            # Un indicador vale 0 (ausente, izquierda) o 1 (presente, derecha).
+            ramas = ("No", "Sí") if binaria else ("Sí", "No")
+            for hijo, respuesta in zip((izquierda, derecha), ramas):
+                activa = en_ruta and hijo in visitados
+                estilo = ', color="#18589D", penwidth=3' if activa else ""
+                arista = f'n{nodo} -> n{hijo} [label="{respuesta}"{estilo}];'
+                completo.append(arista)
+                if activa:
+                    camino.append(arista)
+
+    pasos.sort(key=lambda paso: paso["Paso"])
+    return "\n".join(camino + ["}"]), "\n".join(completo + ["}"]), pasos
 
 
 st.set_page_config(page_title="Clasificador de pacientes")
@@ -296,6 +386,23 @@ if enviar:
     st.write("Probabilidades estimadas por el modelo:")
     for categoria, probabilidad in zip(clases, probabilidades):
         st.write(f"- {categoria}: {probabilidad:.1%}")
+
+    recorrido, arbol_completo, pasos = graficos_del_caso(
+        modelo, nuevo_registro, columnas_numericas, antecedente_a_columna
+    )
+    st.subheader("Cómo se obtuvo este nivel de atención")
+    cantidad = len(pasos)
+    if pasos:
+        condiciones = "1 condición" if cantidad == 1 else f"{cantidad} condiciones"
+        st.write(f"El modelo evaluó {condiciones} y llegó a **{prediccion}**.")
+        st.dataframe(pd.DataFrame(pasos), hide_index=True)
+    else:
+        st.write(f"El árbol asigna **{prediccion}** directamente en su raíz.")
+    with st.expander("Ver el recorrido en el árbol", expanded=True):
+        st.graphviz_chart(recorrido)
+    with st.expander("Ver el árbol completo"):
+        st.caption("Las ramas resaltadas muestran el recorrido del caso ingresado.")
+        st.graphviz_chart(arbol_completo)
 
 
 st.write(f"Precisión en el conjunto de prueba: {precision:.1%}")
