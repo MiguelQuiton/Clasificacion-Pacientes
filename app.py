@@ -14,8 +14,6 @@ from sklearn.preprocessing import StandardScaler
 
 st.set_page_config(page_title="Clasificador de pacientes")
 st.title("Clasificación de pacientes")
-st.caption("Prototipo educativo para probar con casos simulados.")
-
 
 # Carga el archivo pacientes.csv desde la misma carpeta que app.py.
 datos = pd.read_csv(
@@ -31,10 +29,12 @@ datos.columns = datos.columns.astype(str).str.strip()
 columna_antecedente = "antecedente_especifico"
 opciones_antecedentes = []
 if {"antecedentes_relevantes", columna_antecedente}.issubset(datos.columns):
-    antecedentes_csv = datos.loc[datos["antecedentes_relevantes"].eq(1), columna_antecedente]
+    antecedentes_csv = datos.loc[datos["antecedentes_relevantes"].eq(
+        1), columna_antecedente]
     antecedentes_csv = antecedentes_csv.dropna().astype(str).str.strip()
     opciones_antecedentes = sorted(
-        antecedentes_csv[~antecedentes_csv.str.casefold().isin(("", "ninguno"))].unique(),
+        antecedentes_csv[~antecedentes_csv.str.casefold().isin(
+            ("", "ninguno"))].unique(),
         key=str.casefold,
     )
 
@@ -106,14 +106,16 @@ def entrenar_modelo(X, y):
     grupos = X[columna_texto].str.normalize("NFKD").str.encode(
         "ascii", errors="ignore"
     ).str.decode("ascii").str.casefold().str.replace(r"[^a-z0-9]+", " ", regex=True).str.strip()
-    particiones = StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42)
+    particiones = StratifiedGroupKFold(
+        n_splits=5, shuffle=True, random_state=42)
     niveles = set(y)
 
     for entrenamiento, prueba in particiones.split(X, y, grupos):
         if set(y.iloc[entrenamiento]) == niveles and set(y.iloc[prueba]) == niveles:
             break
     else:
-        raise ValueError("Se necesitan más descripciones distintas por nivel para evaluar el modelo.")
+        raise ValueError(
+            "Se necesitan más descripciones distintas por nivel para evaluar el modelo.")
 
     preprocesador = ColumnTransformer(
         [
@@ -125,7 +127,8 @@ def entrenar_modelo(X, y):
     )
     modelo = make_pipeline(
         preprocesador,
-        MLPClassifier(hidden_layer_sizes=(24,), solver="lbfgs", max_iter=300, random_state=42),
+        MLPClassifier(hidden_layer_sizes=(24,), solver="lbfgs",
+                      max_iter=300, random_state=42),
     )
     modelo.fit(X.iloc[entrenamiento], y.iloc[entrenamiento])
     exactitud = accuracy_score(y.iloc[prueba], modelo.predict(X.iloc[prueba]))
