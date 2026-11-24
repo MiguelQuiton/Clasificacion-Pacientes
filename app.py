@@ -28,6 +28,16 @@ datos = pd.read_csv(
 # Quita espacios accidentales de los encabezados.
 datos.columns = datos.columns.astype(str).str.strip()
 
+columna_antecedente = "antecedente_especifico"
+opciones_antecedentes = []
+if {"antecedentes_relevantes", columna_antecedente}.issubset(datos.columns):
+    antecedentes_csv = datos.loc[datos["antecedentes_relevantes"].eq(1), columna_antecedente]
+    antecedentes_csv = antecedentes_csv.dropna().astype(str).str.strip()
+    opciones_antecedentes = sorted(
+        antecedentes_csv[~antecedentes_csv.str.casefold().isin(("", "ninguno"))].unique(),
+        key=str.casefold,
+    )
+
 
 # Variables numéricas del formulario.
 columnas_numericas = [
@@ -175,16 +185,11 @@ antecedentes_especificos = []
 if antecedentes_relevantes:
     antecedentes_especificos = st.multiselect(
         "Selecciona uno o más antecedentes específicos",
-        options=[
-            "Asma estable (sin exacerbación; sin relación aguda en este caso simulado)",
-            "Hipertensión arterial",
-            "Diabetes",
-            "Enfermedad cardíaca",
-            "Enfermedad pulmonar crónica",
-            "Otro antecedente",
-        ],
+        options=opciones_antecedentes,
         help="El modelo usa si hay antecedentes. La selección permite detallarlos en el resultado.",
     )
+    if not opciones_antecedentes:
+        st.caption("El CSV no incluye antecedentes específicos disponibles.")
 
 descripcion = st.text_area("Describe qué está pasando", max_chars=1000)
 enviar = st.button("Clasificar")

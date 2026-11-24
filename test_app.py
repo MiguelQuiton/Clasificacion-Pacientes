@@ -1,3 +1,4 @@
+import csv
 import unittest
 from pathlib import Path
 
@@ -17,6 +18,15 @@ class ClasificacionTests(unittest.TestCase):
         self.assertTrue(app.warning)
 
         app.selectbox[1].set_value(1).run()
+        with ruta.with_name("Pacientes.csv").open(encoding="utf-8-sig", newline="") as archivo:
+            antecedentes_csv = {
+                fila["antecedente_especifico"].strip()
+                for fila in csv.DictReader(archivo, delimiter=";")
+                if fila["antecedentes_relevantes"] == "1"
+                and fila["antecedente_especifico"].strip().casefold() not in ("", "ninguno")
+            }
+        self.assertGreater(len(antecedentes_csv), 6)
+        self.assertEqual(set(app.multiselect[0].options), antecedentes_csv)
         seleccion = app.multiselect[0].options[:2]
         app.multiselect[0].set_value(seleccion)
 
