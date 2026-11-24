@@ -1,4 +1,5 @@
 import json
+import textwrap
 
 import pandas as pd
 import streamlit as st
@@ -41,7 +42,13 @@ def graficos_del_caso(modelo, registro, columnas_numericas, antecedentes):
     inicio = ['digraph Arbol {', 'graph [rankdir=TB];',
               'node [shape=box, style="rounded,filled", fontname="Arial"];']
     completo = inicio.copy()
-    camino = inicio.copy()
+    camino = ['digraph Caso {', 'graph [rankdir=TB, nodesep=0.36, ranksep=0.38, bgcolor=white];',
+              'node [shape=box, style="filled,rounded", fontname="Arial", fontsize=16, fontcolor="#182C40", margin="0.15,0.10"];',
+              'edge [fontname="Arial Bold", fontsize=14, arrowsize=0.8];']
+    visibles = set(visitados)
+    for padre in visitados:
+        if padre != hoja:
+            visibles.update((estructura.children_left[padre], estructura.children_right[padre]))
     pasos = []
     numero_por_nodo = {}
     nodo = 0
@@ -82,8 +89,26 @@ def graficos_del_caso(modelo, registro, columnas_numericas, antecedentes):
         linea = (f'n{nodo} [label={json.dumps(texto, ensure_ascii=False)}, '
                  f'shape={forma}, fillcolor="{color}"];')
         completo.append(linea)
-        if en_ruta:
-            camino.append(linea)
+        if nodo in visibles:
+            if izquierda == derecha:
+                rotulo = f"Nivel elegido\n{clase}" if nodo == hoja else str(clase)
+                forma_caso = "ellipse"
+            else:
+                pregunta = texto
+                if en_ruta:
+                    pregunta = pasos[-1]["Pregunta del árbol"]
+                rotulo = textwrap.fill(pregunta, width=32)
+                if en_ruta:
+                    rotulo = f"{paso}. {rotulo}\nDato: {mostrado}"
+                else:
+                    rotulo += "\nContinúa…"
+                forma_caso = "box"
+            borde = "#14633F" if nodo == hoja else "#18589D" if en_ruta else "#8996A3"
+            grupo = "recorrido" if en_ruta else "alternativas"
+            fuente = "Arial Bold" if nodo == hoja else "Arial"
+            camino.append(f'n{nodo} [label={json.dumps(rotulo, ensure_ascii=False)}, '
+                          f'shape={forma_caso}, group="{grupo}", fontname="{fuente}", '
+                          f'fillcolor="{color}", color="{borde}", penwidth={3 if nodo == hoja else 1.5}];')
         if izquierda != derecha:
             # Un indicador vale 0 (ausente, izquierda) o 1 (presente, derecha).
             ramas = ("No", "Sí") if binaria else ("Sí", "No")
@@ -92,8 +117,15 @@ def graficos_del_caso(modelo, registro, columnas_numericas, antecedentes):
                 estilo = ', color="#18589D", penwidth=3' if activa else ""
                 arista = f'n{nodo} -> n{hijo} [label="{respuesta}"{estilo}];'
                 completo.append(arista)
-                if activa:
-                    camino.append(arista)
+                if en_ruta:
+                    atributos = ('color="#18589D", fontcolor="#18589D", penwidth=3, weight=30'
+                                 if activa else 'color="#808D99", fontcolor="#455563", style=dashed')
+                    camino.append(f'n{nodo} -> n{hijo} [label="{respuesta}", {atributos}];')
+            if en_ruta:
+                principal, alternativa = ((izquierda, derecha) if izquierda in visitados
+                                          else (derecha, izquierda))
+                camino.append(f'{{rank=same; n{principal}; n{alternativa}; '
+                              f'n{principal} -> n{alternativa} [style=invis];}}')
 
     pasos.sort(key=lambda paso: paso["Paso"])
     return "\n".join(camino + ["}"]), "\n".join(completo + ["}"]), pasos
@@ -390,16 +422,18 @@ if enviar:
     recorrido, arbol_completo, pasos = graficos_del_caso(
         modelo, nuevo_registro, columnas_numericas, antecedente_a_columna
     )
-    st.subheader("Cómo se obtuvo este nivel de atención")
+    st.subheader("Árbol de decisión del caso")
+    st.caption("Sigue la línea azul de arriba abajo hasta el nivel elegido. "
+               "Las ramas grises punteadas muestran las alternativas.")
+    st.graphviz_chart(recorrido)
     cantidad = len(pasos)
     if pasos:
         condiciones = "1 condición" if cantidad == 1 else f"{cantidad} condiciones"
         st.write(f"El modelo evaluó {condiciones} y llegó a **{prediccion}**.")
-        st.dataframe(pd.DataFrame(pasos), hide_index=True)
+        with st.expander("Leer los pasos en una tabla"):
+            st.dataframe(pd.DataFrame(pasos), hide_index=True)
     else:
         st.write(f"El árbol asigna **{prediccion}** directamente en su raíz.")
-    with st.expander("Ver el recorrido en el árbol", expanded=True):
-        st.graphviz_chart(recorrido)
     with st.expander("Ver el árbol completo"):
         st.caption("Las ramas resaltadas muestran el recorrido del caso ingresado.")
         st.graphviz_chart(arbol_completo)
