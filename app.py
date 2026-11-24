@@ -131,49 +131,63 @@ except ValueError as error:
 
 st.subheader("Datos de entrada")
 
-with st.form("formulario_paciente"):
-    edad = st.number_input(
-        "Edad",
-        min_value=0,
-        max_value=120,
-        value=30,
+edad = st.number_input(
+    "Edad",
+    min_value=0,
+    max_value=120,
+    value=30,
+)
+
+temperatura = st.number_input(
+    "Temperatura (°C)",
+    min_value=30.0,
+    max_value=45.0,
+    value=36.5,
+    step=0.1,
+)
+
+frecuencia_cardiaca = st.number_input(
+    "Frecuencia cardíaca (latidos por minuto)",
+    min_value=20,
+    max_value=250,
+    value=75,
+)
+
+saturacion_oxigeno = st.number_input(
+    "Saturación de oxígeno (%)",
+    min_value=50,
+    max_value=100,
+    value=98,
+)
+
+sintomas = st.selectbox(
+    "Cantidad de síntomas",
+    options=range(5),
+)
+
+antecedentes_relevantes = st.selectbox(
+    "¿Tiene antecedentes relevantes?",
+    options=[0, 1],
+    format_func=lambda valor: "No" if valor == 0 else "Sí",
+)
+
+antecedentes_especificos = []
+if antecedentes_relevantes:
+    antecedentes_especificos = st.multiselect(
+        "Selecciona uno o más antecedentes específicos",
+        options=[
+            "Asma estable (sin exacerbación; sin relación aguda en este caso simulado)",
+            "Hipertensión arterial",
+            "Diabetes",
+            "Enfermedad cardíaca",
+            "Enfermedad pulmonar crónica",
+            "Otro antecedente",
+        ],
+        help="El modelo usa si hay antecedentes. La selección permite detallarlos en el resultado.",
     )
 
-    temperatura = st.number_input(
-        "Temperatura (°C)",
-        min_value=30.0,
-        max_value=45.0,
-        value=36.5,
-        step=0.1,
-    )
-
-    frecuencia_cardiaca = st.number_input(
-        "Frecuencia cardíaca (latidos por minuto)",
-        min_value=20,
-        max_value=250,
-        value=75,
-    )
-
-    saturacion_oxigeno = st.number_input(
-        "Saturación de oxígeno (%)",
-        min_value=50,
-        max_value=100,
-        value=98,
-    )
-
-    sintomas = st.selectbox(
-        "Cantidad de síntomas",
-        options=range(5),
-    )
-
-    antecedentes_relevantes = st.selectbox(
-        "¿Tiene antecedentes relevantes?",
-        options=[0, 1],
-        format_func=lambda valor: "No" if valor == 0 else "Sí",
-    )
-
-    descripcion = st.text_area("Describe qué está pasando", max_chars=1000)
-    enviar = st.form_submit_button("Clasificar")
+descripcion = st.text_area("Describe qué está pasando", max_chars=1000)
+enviar = st.button("Clasificar")
 
 
 if enviar:
@@ -193,6 +207,10 @@ if enviar:
         nivel = modelo.classes_[probabilidades.argmax()]
         st.subheader("Resultado del prototipo")
         st.write(f"**Clasificación estimada: {nivel}**")
+        if antecedentes_especificos:
+            st.write("Antecedentes seleccionados")
+            for antecedente in antecedentes_especificos:
+                st.write(f"- {antecedente}")
 
         with st.expander("Probabilidades estimadas por el modelo"):
             for categoria, probabilidad in zip(modelo.classes_, probabilidades):
