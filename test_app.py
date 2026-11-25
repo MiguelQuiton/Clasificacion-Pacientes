@@ -45,6 +45,11 @@ class ClasificacionTests(unittest.TestCase):
                     "Clasificación estimada: Nivel " in salida.value
                     for salida in app.markdown
                 ))
+                self.assertIn("Recorrido del árbol", [titulo.value for titulo in app.subheader])
+                self.assertTrue(any(
+                    "Árbol: Nivel " in salida.value and "Red neuronal: Nivel " in salida.value
+                    for salida in app.markdown
+                ))
 
         for antecedente in seleccion:
             self.assertIn(f"- {antecedente}", [salida.value for salida in app.markdown])

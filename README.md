@@ -1,7 +1,7 @@
 # Clasificacion-Pacientes
 
-Prototipo educativo con casos simulados. Una red neuronal combina los datos
-del formulario con la descripción libre para estimar uno de cinco niveles.
+Prototipo educativo con casos simulados. Un árbol de decisión y una red neuronal
+estiman uno de cinco niveles.
 
 ## Ejecución local
 
@@ -12,7 +12,21 @@ python -m streamlit run app.py --global.developmentMode false --server.address 1
 
 Abre http://127.0.0.1:8502 en el navegador.
 
-## Arquitectura
+## Arquitectura combinada
+
+El árbol usa los valores numéricos y un indicador por antecedente específico.
+La red usa los valores numéricos y la descripción libre. La aplicación combina
+las probabilidades de ambos modelos para estimar el nivel y muestra el recorrido
+que explica la predicción del árbol.
+
+La selección del peso compara el árbol solo con tres combinaciones, usando
+25 %, 50 % o 75 % para la red. Se elige el peso que maximiza la exactitud
+equilibrada en validación y se usa la sensibilidad de Nivel 1 para resolver
+empates. La aplicación muestra por separado las métricas de ambos métodos en
+prueba. Las descripciones normalizadas quedan agrupadas al dividir los datos
+entre ajuste, validación y prueba.
+
+## Red neuronal
 
 El modelo se entrena en local con [Pacientes.csv](Pacientes.csv). La columna
 `clasificacion` es la etiqueta que aprende a predecir. El pipeline de
@@ -30,7 +44,10 @@ El modelo se entrena en local con [Pacientes.csv](Pacientes.csv). La columna
    iteraciones y la semilla 42. La app muestra el nivel con mayor probabilidad
    estimada de los cinco.
 
-## Evaluación con el CSV del proyecto
+## Evaluación histórica de la red sola
+
+Estas métricas corresponden a la versión anterior del CSV y a la red neuronal
+antes de combinarla con el árbol.
 
 Tras limpiar los datos y quitar duplicados quedaron 530 registros. Se usó
 la primera partición de `StratifiedGroupKFold` con los cinco niveles
